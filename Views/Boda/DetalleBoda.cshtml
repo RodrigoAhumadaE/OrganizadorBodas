@@ -3,6 +3,7 @@
 <div class="boda">
     <H2 class="Titulo">La Boda de @Model.Novia & @Model.Novio</H2>
     <h4>Fecha: @Model.Fecha.ToString("MMM dd, yyyy")</h4>
+    <h4>Dirección: @Model.Direccion</h4>
     <h4>Asistentes:</h4>
     <div class="asistentes">
         @if(Model.ListaParticipaciones.Count > 0){
