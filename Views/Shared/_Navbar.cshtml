@@ -1,0 +1,10 @@
+<nav>
+    <div class="bienvenida">
+        <h3>Bienvenido @Context.Session.GetString("nombreUsuario")</h3>
+    </div>
+    <div class="opciones">
+        <a asp-controller="Boda" asp-action="Bodas">Inicio</a>
+        <a asp-controller="Boda" asp-action="NuevaBoda">Planear Boda</a>
+        <a asp-controller="Usuario" asp-action="Logout">Logout</a>
+    </div>
+</nav>

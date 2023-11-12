@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Bodas";
+}
+@await Html.PartialAsync("_Navbar")
+@model List<Boda>
+<div class="bodas">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Boda de</th>
+                <th>Fecha</th>
+                <th>Participantes</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Boda boda in @Model){
+                <tr>
+                    <td><a asp-controller="Boda" asp-action="DetalleBoda" asp-route-BodaId="@boda.BodaId">@boda.Novia & @boda.Novio</a></td>
+                    <td>@boda.Fecha.ToString("MMM dd, yyy")</td>
+                    <td>@boda.ListaParticipaciones.Count</td>
+                    @if(@boda.UsuarioId == Context.Session.GetInt32("id")){
+                        <td><a asp-controller="Boda" asp-action="EliminarBoda" asp-route-BodaId="@boda.BodaId">Borrar</a></td>
+                    }else{
+                        var participacion = boda.ListaParticipaciones.FirstOrDefault(p => p.UsuarioId == Context.Session.GetInt32("id"));
+                        if(participacion != null){
+                            <td>
+                                <a asp-controller="Participacion" asp-action="EliminaParticipacion" asp-route-ParticipacionId="@participacion.ParticipacionId">
+                                    <button class="btn btn-secondary btn-sm">Cancelar Asistencia</button>
+                                </a>
+                            </td>
+                        }else{
+                            <td>
+                                <form method="POST" asp-controller="Participacion" asp-action="ProcesaParticipacion" asp-route-BodaId="@boda.BodaId" asp-route-UsuarioId="@Context.Session.GetInt32("id")">
+                                    <button class="btn btn-success btn-sm">Confirmar Asistencia</button>
+                                </form>
+                            </td>
+                        }                     
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,16 @@
+@await Html.PartialAsync("_Navbar")
+@model Boda
+<div class="boda">
+    <H2 class="Titulo">La Boda de @Model.Novia & @Model.Novio</H2>
+    <h4>Fecha: @Model.Fecha.ToString("MMM dd, yyyy")</h4>
+    <h4>Asistentes:</h4>
+    <div class="asistentes">
+        @if(Model.ListaParticipaciones.Count > 0){
+           @foreach(Participacion p in Model.ListaParticipaciones){
+                <h5>@p.Usuario.Nombre @p.Usuario.Apellido</h5>
+            } 
+        }else{
+            <h5>No hay confirmaciones aún</h5>
+        }        
+    </div>
+</div>

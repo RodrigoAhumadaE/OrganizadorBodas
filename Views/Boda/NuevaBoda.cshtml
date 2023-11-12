@@ -1,0 +1,47 @@
+@model Boda
+@await Html.PartialAsync("_Navbar")
+<div class="boda">
+    <h2>Planear una Boda</h2>
+    <form asp-controller="Boda" asp-action="ProcesaBoda">
+        <div class="item">
+            <div class="input">
+                <label asp-for="Novia">Nombre Novia:</label>
+                <input type="text" asp-for="Novia">
+            </div>
+            <div class="msn-error">
+                <span asp-validation-for="Novia"></span>
+            </div>
+        </div>
+        <div class="item">
+            <div class="input">
+                <label asp-for="Novio">Nombre Novio:</label>
+                <input type="text" asp-for="Novio">
+            </div>
+            <div class="msn-error">
+                <span asp-validation-for="Novio"></span>
+            </div>
+        </div>
+        <div class="item">
+            <div class="input">
+                <label asp-for="Fecha">Fecha Boda:</label>
+                <input type="Date" asp-for="Fecha">
+            </div>
+            <div class="msn-error">
+                <span asp-validation-for="Fecha"></span>
+            </div>
+        </div>
+        <div class="item">
+            <div class="input">
+                <label asp-for="Direccion">Dirección:</label>
+                <input type="text" asp-for="Direccion">
+            </div>
+            <div class="msn-error">
+                <span asp-validation-for="Direccion"></span>
+            </div>
+        </div>
+        <input type="hidden" asp-for="UsuarioId" value="@Context.Session.GetInt32("id")">
+        <div class="boton">
+            <button class="btn btn-primary">Crear</button>
+        </div>
+    </form>
+</div>
